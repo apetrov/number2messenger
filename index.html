@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div class="row text-center">
+            <h1>Number to Chat deeplink</h1>
+          </div>
+          <div class="row text-center">
+            <input type='text' role='phone'/>
+          </div>
+
+          <div class="row text-center">
+            <a role='tg' href="tg://resolve?phone=XXXX"><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png' height='128px' width='128px'/></a>
+          </div>
+
+          <div class="row text-center">
+            <a role='wa' href="whatsapp://send?phone=XXXX">
+              <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1024px-WhatsApp.svg.png' height='128px' width='128px'/>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+    <script>
+      function updateTelegram(val){
+        $('[role=tg').attr('href', "tg://resolve?phone="+val);
+      }
+
+      function updateWhatsapp(val){
+        $('[role=wa').attr('href', "whatsapp://send?phone="+val);
+      }
+
+      function updateLinks(x){
+        const phone = $(x.target).val();
+        const cleanPhone = phone.replace(/[^0-9]/g, '');
+        updateTelegram(cleanPhone);
+        updateWhatsapp(cleanPhone);
+      }
+
+      $(document).ready(()=>{
+        $('[role=phone]').on('keyup', updateLinks);
+        $('[role=phone]').on('change', updateLinks).trigger('change');
+      });
+    </script>
+  </body>
+</html>
